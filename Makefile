@@ -1,6 +1,6 @@
-FLAGS = -Wall -Wextra -Werror
-SRC = ft_strlen.s
 NAME = libasm.a
+FLAGS = -Wall -Wextra -Werror
+SRC = ft_strlen.s ft_strcpy.s
 OBJ = $(SRC:%.s=%.o)
 
 %.o: %.s
