@@ -2,8 +2,8 @@
 
 void	test_ft_strlen(char *str)
 {
-	printf("Strlen: %-20d\n", strlen(str));
-	printf("Ft_strlen: %-20d\n", ft_strlen(str));
+	printf("Strlen: %10lu\n", strlen(str));
+	printf("Ft_strlen: %7d\n", ft_strlen(str));
 }
 
 int		main(int ac, char **av)
