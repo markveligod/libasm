@@ -6,7 +6,7 @@
 /*   By: ckakuna <42.fr>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:46:58 by ckakuna           #+#    #+#             */
-/*   Updated: 2020/07/17 10:57:05 by ckakuna          ###   ########.fr       */
+/*   Updated: 2020/07/17 13:30:53 by ckakuna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,62 @@ void	test_ft_read(int buffer_size)
 	close(fd);
 }
 
+void	test_ft_strdup(char *str)
+{	
+	printf("Ft_strdup: %s\n", ft_strdup(str));
+	printf("   Strdup: %s\n", strdup(str));
+}
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*temp;
+
+	if (!(*lst))
+		*lst = new;
+	else
+	{
+		temp = *lst;
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new;
+	}
+}
+
+void	test_ft_list_size(int size)
+{
+	t_list *list;
+	t_list	*new;
+	int i;
+	char res[size + 1];
+
+	if (size == 0)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		res[i] = i + ' ';
+		i++;
+	}
+	res[i] = '\0';
+	i = 0;
+	while (i < size)
+	{
+		new = (t_list *)malloc(sizeof(t_list));
+		new->data = &res[i];
+		new->next = NULL;
+		ft_lstadd_back(&list, new);
+		i++;
+	}
+	i = 0;
+	printf ("Size list: %d\n\n", ft_list_size(list));
+	while (i < size)
+	{
+		printf ("List: %d content: %c\n", i + 1, *((char *)list->data));
+		i++;
+		list = list->next;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	if (ac == 3)
@@ -86,6 +142,10 @@ int		main(int ac, char **av)
 			test_ft_read(atoi(av[2]));
 		else if ((strcmp("ft_write", av[1]) == 0) || (strcmp("write", av[1]) == 0))
 			test_ft_write(av[2]);
+		else if ((strcmp("ft_strdup", av[1]) == 0) || (strcmp("strdup", av[1]) == 0))
+			test_ft_strdup(av[2]);
+		else if ((strcmp("ft_list_size", av[1]) == 0) || (strcmp("list_size", av[1]) == 0))
+			test_ft_list_size(atoi(av[2]));
 		else
 			printf("./a.out [NAME FUNCTION] [ARGUMENTS]\n");
 	}
