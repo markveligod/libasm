@@ -2,7 +2,7 @@ section .text
     global _ft_strlen
 
 _ft_strlen:
-    mov rax, 0                  ; int i = 0
+    xor rax, rax                  ; int i = 0
     cmp rdi, 0                  ; char *str == NULL
     je exit                     ; if (char *str == NULL) => return (NULL)
     jmp loop                    ; jump to loop

@@ -2,7 +2,7 @@ section .text
     global _ft_strcpy
 
 _ft_strcpy:
-    mov rax, 0              ; char temp
+    xor rax, rax              ; char temp
     push rdi                ; rdi = dst
     jmp loop                ; jump to loop
 
