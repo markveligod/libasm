@@ -1,9 +1,11 @@
 section .text
     global _ft_strcpy
 
+; rdi = dest, rsi = src
+
 _ft_strcpy:
     xor rax, rax              ; char temp
-    push rdi                ; rdi = dst
+    push rdi                ; rdi => stack
     jmp loop                ; jump to loop
 
 loop:
@@ -17,5 +19,5 @@ loop:
 
 exit:
     mov BYTE [rdi], 0       ; add \0
-    pop rax
-    ret
+    pop rax                 ; rax <= stack
+    ret                     ; return ()
