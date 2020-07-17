@@ -6,7 +6,7 @@
 /*   By: ckakuna <42.fr>                            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:46:58 by ckakuna           #+#    #+#             */
-/*   Updated: 2020/07/17 13:30:53 by ckakuna          ###   ########.fr       */
+/*   Updated: 2020/07/17 14:37:40 by ckakuna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,22 @@ void	test_ft_list_size(int size)
 	}
 }
 
+void	test_list_push_front(char *str)
+{
+	t_list *list;
+	char *mystr = "Hello man!";
+	char *mystr3 = "YEah i am 3 booooooy!";
+	void *data;
+
+	data = mystr3;
+	ft_list_push_front(&list, data);
+	data = mystr;
+	ft_list_push_front(&list, data);
+	data = str;
+	ft_list_push_front(&list, data);
+	printf("List 1: %s\nList 2: %s\nList 3: %s\n", (char *)list->data, (char *)list->next->data, (char *)list->next->next->data);
+}
+
 int		main(int ac, char **av)
 {
 	if (ac == 3)
@@ -146,6 +162,8 @@ int		main(int ac, char **av)
 			test_ft_strdup(av[2]);
 		else if ((strcmp("ft_list_size", av[1]) == 0) || (strcmp("list_size", av[1]) == 0))
 			test_ft_list_size(atoi(av[2]));
+		else if ((strcmp("ft_list_push_front", av[1]) == 0) || (strcmp("list_push_front", av[1]) == 0))
+			test_list_push_front(av[2]);
 		else
 			printf("./a.out [NAME FUNCTION] [ARGUMENTS]\n");
 	}
