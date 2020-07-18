@@ -6,7 +6,7 @@
 /*   By: ckakuna <ck@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:46:58 by ckakuna           #+#    #+#             */
-/*   Updated: 2020/07/18 11:25:06 by ckakuna          ###   ########.fr       */
+/*   Updated: 2020/07/18 14:45:13 by ckakuna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,49 @@ void 	test_ft_list_sort(int size)
 	}
 }
 
+void	test_ft_list_remove_if(int size, char *str)
+{
+	t_list *list;
+	t_list	*new;
+	int i;
+	char *res = "LOL HD";
+
+	if (size <= 0)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		new = (t_list *)malloc(sizeof(t_list));
+		if ((i + 1) % 2 == 0)
+			new->data = res;
+		else
+			new->data = str;
+		new->next = NULL;
+		ft_lstadd_back(&list, new);
+		i++;
+	}
+	i = 0;
+	new = list;
+	printf("\n\nBefore: \n\n");
+	while (i < size)
+	{
+		printf ("List: %d content: %s\n", i + 1, (char *)new->data);
+		i++;
+		new = new->next;
+	}
+	ft_list_remove_if(&list, str, strcmp);
+	i = 0;
+	new = list;
+	size = ft_list_size(new);
+	printf("\n\nAfter: \n\n");
+	while (i < size)
+	{
+		printf ("List: %d content: %s\n", i + 1, (char *)new->data);
+		i++;
+		new = new->next;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	if (ac == 3)
@@ -294,6 +337,8 @@ int		main(int ac, char **av)
 			test_ft_strcmp(av[2], av[3]);
 		if ((strcmp("ft_atoi_base", av[1]) == 0) || (strcmp("atoi_base", av[1]) == 0))
 			test_ft_atoi_base(av[2], av[3]);
+		if ((strcmp("ft_list_remove_if", av[1]) == 0) || (strcmp("list_remove_if", av[1]) == 0))
+			test_ft_list_remove_if(atoi(av[2]), av[3]);
 		else
 			printf("./a.out [NAME FUNCTION] [ARGUMENTS]\n");
 	}
