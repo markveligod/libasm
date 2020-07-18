@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ckakuna <42.fr>                            +#+  +:+       +#+        */
+/*   By: ckakuna <ck@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:46:58 by ckakuna           #+#    #+#             */
-/*   Updated: 2020/07/17 14:37:40 by ckakuna          ###   ########.fr       */
+/*   Updated: 2020/07/18 08:17:40 by ckakuna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,78 @@ void	test_list_push_front(char *str)
 	printf("List 1: %s\nList 2: %s\nList 3: %s\n", (char *)list->data, (char *)list->next->data, (char *)list->next->next->data);
 }
 
+int		is_base(char c, char *base)
+{
+	int		i;
+
+	i = 0;
+	while (base[i])
+	{
+		if (base[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int		check_base(char *base)
+{
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	len = strlen(base);
+	if (len == 0 || len == 1)
+		return (0);
+	while (base[i])
+	{
+		j = i + 1;
+		if (base[i] == '-' || base[i] == '+' || base[i] < 32 || base[i] > 127 || base[i] == ' ')
+			return (0);
+		while (base[j])
+		{
+			if (base[i] == base[j])
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+int		atoi_base(char *str, char *base)
+{
+	int		atoi;
+	int		negative;
+
+	atoi = 0;
+	negative = 1;
+	if (!check_base(base))
+		return (0);
+	while (*str == '\t' || *str == '\v' || *str == '\n' || *str == '\r'
+			|| *str == '\f' || *str == ' ')
+		str++;
+	while (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			negative = negative * (-1);
+		str++;
+	}
+	while (is_base(*str, base) >= 0)
+	{
+		atoi = atoi * strlen(base) + is_base(*str, base);
+		str++;
+	}
+	return (atoi * negative);
+}
+
+void	test_ft_atoi_base(char *str, char *base)
+{
+	printf("Ft_atoi_base: %d\n", ft_atoi_base(str, base));
+	printf("   Atoi_base: %d\n", atoi_base(str, base));
+}
+
 int		main(int ac, char **av)
 {
 	if (ac == 3)
@@ -171,6 +243,8 @@ int		main(int ac, char **av)
 	{
 		if ((strcmp("ft_strcmp", av[1]) == 0) || (strcmp("strcmp", av[1]) == 0))
 			test_ft_strcmp(av[2], av[3]);
+		if ((strcmp("ft_atoi_base", av[1]) == 0) || (strcmp("atoi_base", av[1]) == 0))
+			test_ft_atoi_base(av[2], av[3]);
 		else
 			printf("./a.out [NAME FUNCTION] [ARGUMENTS]\n");
 	}

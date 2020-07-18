@@ -110,14 +110,14 @@ sign:
     mov r13, rax        ; result move in r13 registr
     jmp convert         ; jump to convert
 
-inc_skip:
+inc_sign:
     inc r10             ; *str++
     jmp sign            ; jump to sign
 
 minus:
-    inc r10
-    imul rax, -1
-    jmp sign
+    inc r10             ; *str++
+    imul rax, -1        ; rax * (-1)
+    jmp sign            ; jump to sign
 
 ; conver char to int
 convert:
