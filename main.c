@@ -6,7 +6,7 @@
 /*   By: ckakuna <ck@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 14:46:58 by ckakuna           #+#    #+#             */
-/*   Updated: 2020/07/18 08:17:40 by ckakuna          ###   ########.fr       */
+/*   Updated: 2020/07/18 11:25:06 by ckakuna          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	test_ft_list_size(int size)
 	int i;
 	char res[size + 1];
 
-	if (size == 0)
+	if (size <= 0)
 		return ;
 	i = 0;
 	while (i < size)
@@ -218,6 +218,53 @@ void	test_ft_atoi_base(char *str, char *base)
 	printf("   Atoi_base: %d\n", atoi_base(str, base));
 }
 
+void 	test_ft_list_sort(int size)
+{
+	t_list *list;
+	t_list	*new;
+	int i;
+	int res[size];
+
+	if (size <= 0)
+		return ;
+	i = 0;
+	while (i < size)
+	{
+		res[i] = rand() % 100;
+		i++;
+	}
+	i = 0;
+	while (i < size)
+	{
+		new = (t_list *)malloc(sizeof(t_list));
+		new->data = &res[i];
+		new->next = NULL;
+		ft_lstadd_back(&list, new);
+		i++;
+	}
+	i = 0;
+	new = NULL;
+	new = list;
+	printf("\n\nBefore:\n\n");
+	while (i < size)
+	{
+		printf("List %d: %d\n", i + 1, *(int *)new->data);
+		new = new->next;
+		i++;
+	}
+	ft_list_sort(&list, strcmp);
+	i = 0;
+	new = NULL;
+	new = list;
+	printf("\n\nAfter:\n\n");
+	while (i < size)
+	{
+		printf("List %d: %d\n", i + 1, *(int *)new->data);
+		new = new->next;
+		i++;
+	}
+}
+
 int		main(int ac, char **av)
 {
 	if (ac == 3)
@@ -236,6 +283,8 @@ int		main(int ac, char **av)
 			test_ft_list_size(atoi(av[2]));
 		else if ((strcmp("ft_list_push_front", av[1]) == 0) || (strcmp("list_push_front", av[1]) == 0))
 			test_list_push_front(av[2]);
+		else if ((strcmp("ft_list_sort", av[1]) == 0) || (strcmp("list_sort", av[1]) == 0))
+			test_ft_list_sort(atoi(av[2]));
 		else
 			printf("./a.out [NAME FUNCTION] [ARGUMENTS]\n");
 	}

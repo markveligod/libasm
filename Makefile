@@ -1,7 +1,7 @@
 NAME = libasm.a
 FLAGS = -Wall -Wextra -Werror
 SRC = ./src/ft_strlen.s ./src/ft_strcpy.s ./src/ft_strcmp.s ./src/ft_write.s ./src/ft_read.s ./src/ft_strdup.s
-BONUS = ./src/ft_list_size_bonus.s ./src/ft_list_push_front_bonus.s ./src/ft_atoi_base_bonus.s
+BONUS = ./src/ft_list_size_bonus.s ./src/ft_list_push_front_bonus.s ./src/ft_atoi_base_bonus.s ./src/ft_list_sort_bonus.s
 OBJ = $(SRC:%.s=%.o)
 OBJ_BONUS = $(BONUS:%.s=%.o)
 
