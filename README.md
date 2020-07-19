@@ -208,7 +208,7 @@ The pointer registers are the 32-bit EIP, ESP, and EBP registers and the corresp
 * Destination Index — or DI) - used as the destination index in string operations.  
 
 
-![Фото регистра](https://github.com/markveligod/libasm/raw/master/img/4.jpg)  
+![Фото регистра](https://github.com/markveligod/libasm/raw/master/img/5.jpg)  
 
 ### Control register
 The control register is a combined 32-bit instruction register and 32-bit flag register (the processor register that reflects its current state). Many instructions include comparison operations and mathematical calculations that can change the state of flags, and some other conditional instructions check the values of state flags to move the control flow to another location.
